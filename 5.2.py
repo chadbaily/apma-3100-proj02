@@ -47,15 +47,15 @@ print("Average: ", np.mean(ycord))
 print("Sqrt of Standard Deviation: ", math.sqrt(np.std(ycord)))
 
 
-# plt.title('Monte-Carlo Simulation')
-# plt.scatter(*zip(*results))
-# plt.axhline(0.7633496513793749, color='black')
-# plt.ylabel('mn')
-# plt.xlabel('n')
-# plt.show()
+plt.title('Monte-Carlo Simulation')
+plt.scatter(*zip(*results))
+plt.axhline(-0.0016682723651293228, color='black')
+plt.ylabel('mn')
+plt.xlabel('n')
+plt.show()
 
 # Print out all results
-count = 0
-for i in results:
-    print(str(count) + ": " + str(i))
-    count += 1
+# count = 0
+# for i in results:
+#     print(str(count) + ": " + str(i))
+#     count += 1
