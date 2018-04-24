@@ -1,4 +1,6 @@
 import math
+import numpy as np
+import matplotlib.pyplot as plt
 
 x = 1000
 a = 24693
@@ -28,11 +30,22 @@ for n in mN:
         tempResults = []
         while count < n:
             count += 1
-            tempResults.append(
-                math.sqrt(uVal.pop(0)**2 + uVal.pop(0)**2))
-        results.append(sum(tempResults) / n)  # M_n
+            tempResults.append((n,
+                                math.sqrt(uVal.pop(0)**2 + uVal.pop(0)**2)))
+        results.append((n, sum([pair[1] for pair in tempResults]) / n))  # M_n
 
-count = 0
-for i in results:
-    print(str(count) + ": " + str(i))
-    count += 1
+
+print("Average: ", np.mean([pair[1] for pair in results]))
+
+plt.title('Monte-Carlo Simulation')
+plt.scatter(*zip(*results))
+plt.axhline(0.7633496513793749, color='black')
+plt.ylabel('mn')
+plt.xlabel('n')
+plt.show()
+
+# Print out all results
+# count = 0
+# for i in results:
+#     print(str(count) + ": " + str(i))
+#     count += 1
