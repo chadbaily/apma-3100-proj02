@@ -22,8 +22,8 @@ while count < itterations:
 
 mN = [5, 10, 30, 50, 100, 150, 250, 500]
 results = []
-mean = 0.7633496513793749  # mean
-sigma = 0.246349662499206  # sqrt of var
+mean = 71.15437313155435  # mean
+sigma = 2.762189518228876  # sqrt of var
 
 
 def zscore(mn, n):
@@ -39,17 +39,42 @@ for n in mN:
         while count < n:
             count += 1
             tempResults.append((n,
-                                zscore(math.sqrt(uVal.pop(0)**2 + uVal.pop(0)**2), n)))
-        results.append((n, sum([pair[1] for pair in tempResults]) / n))  # M_n
+                                math.sqrt((-2 * math.log(1 - uVal.pop(0))) / ((1 / 57)**2))))
+        results.append(
+            (n, zscore(sum([pair[1] for pair in tempResults]) / n, n)))  # M_n
 
 ycord = [pair[1] for pair in results]
 print("Average: ", np.mean(ycord))
 print("Sqrt of Standard Deviation: ", math.sqrt(np.std(ycord)))
 
 
+points = [0, 0, 0, 0, 0, 0, 0]
+
+for point in ycord:
+    if(point <= 1.4):
+        points[0] += 1
+    if(point <= 1.0):
+        points[1] += 1
+    if(point <= 0.5):
+        points[2] += 1
+    if(point <= 0):
+        points[3] += 1
+    if(point <= -0.5):
+        points[4] += 1
+    if(point <= -1):
+        points[5] += 1
+    if(point <= -1.4):
+        points[6] += 1
+
+for i in range(0, len(points)):
+    points[i] = points[i] / 880  # getting probability
+
+for point in points:
+    print("The probability of 1.4, ... is: " + str(point))
+
 plt.title('Monte-Carlo Simulation')
 plt.scatter(*zip(*results))
-plt.axhline(-0.0016682723651293228, color='black')
+plt.axhline(np.mean(ycord), color='black')
 plt.ylabel('mn')
 plt.xlabel('n')
 plt.show()
