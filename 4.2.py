@@ -29,7 +29,7 @@ for n in mN:
         tempResults = []
         for w in range(0, n):
             tempResults.append((n,
-                                math.sqrt((-2*math.log10(1-uVal.pop(0))) / (1/57)**2)))
+                                math.sqrt((-2*math.log10(1-uVal.pop(0))) / ((1/57)**2))))
         results.append((n, sum([pair[1] for pair in tempResults]) / n))  # M_n
 
 mean = np.mean([pair[1] for pair in results])
@@ -38,7 +38,7 @@ print("Average: ", mean)
 plt.title('Monte-Carlo Simulation')
 plt.scatter(*zip(*results))
 plt.axhline(mean, color='black')
-plt.ylabel('mn')
+plt.ylabel('mn (in inches)')
 plt.xlabel('n')
 plt.show()
 
