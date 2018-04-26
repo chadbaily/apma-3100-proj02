@@ -71,32 +71,41 @@ for point in ycord:
 for i in range(0, len(points)):
     points[i] = points[i] / 880  # getting probability
 
+empericalCDF = []
 for i in range(0, len(points)):
     print("The probability of " + str(zValues[i]) + " is: " + str(points[i]))
+    empericalCDF.append((zValues[i], points[i]))
+
 
 madnValues = []
 cdfValue = [0.9192, 0.8413, 0.6915, 0.5, 0.3085, 0.1587, 0.0808]
 for i in range(0, len(points)):
     madnValues.append(np.abs(points[i] - cdfValue[i]))
 
-print("The max value for MADn = " + str(np.amax(madnValues)))
+MADn = np.amax(madnValues)
+MADnPlot = (zValues[np.argmax(madnValues)], MADn)
+print("The max value for MADn = " + str(MADn))
 
 # Calculate the z score for -2.5 to 2.5
-z = []
-cdf = []
+# z = []
+# cdf = []
+plotCDF = []
 start = -2.5
 while start <= 2.5:
-    cdf.append(st.norm.cdf(start))
-    z.append(start)
+    # cdf.append(st.norm.cdf(start))
+    # z.append(start)
+    plotCDF.append((start, st.norm.cdf(start)))
     start += 0.01
 
 # for i in range(0, len(z)):
 #     print("The z score for " + str(z[i]) + " is " + str(cdf[i]))
 
 
-plt.title('Monte-Carlo Simulation')
-plt.scatter(*zip(*results))
-plt.axhline(np.mean(ycord), color='black')
+plt.title('')
+plt.plot(*zip(*plotCDF))
+plt.scatter(*zip(*empericalCDF))
+plt.scatter(*MADnPlot)
+# plt.axhline(np.mean(ycord), color='black')
 plt.ylabel('mn')
 plt.xlabel('n')
 plt.show()
