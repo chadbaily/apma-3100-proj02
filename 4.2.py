@@ -43,13 +43,16 @@ for point in ycord:
 
 print("Probability of p: " + str(count / 880))
 
-plt.title('Monte-Carlo Simulation')
+
+plt.rc('font', family='serif')
+plt.title('Mean over Sample Size')
 plt.scatter(*zip(*results))
 plt.axhline(np.mean(ycord), color='black')
 plt.axhline(np.mean(ycord) - 10, color='black')
 plt.axhline(np.mean(ycord) + 10, color='black')
-plt.ylabel('mn (in inches)')
-plt.xlabel('n')
+plt.ylabel(r'$M_n(x)$')
+plt.xlabel(r'$n$')
+plt.xticks(np.arange(0, 600, 50))
 plt.show()
 
 # Print out all results

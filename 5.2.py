@@ -99,13 +99,14 @@ for n in mN:
     # for i in range(0, len(z)):
     #     print("The z score for " + str(z[i]) + " is " + str(cdf[i]))
 
-    plt.title('Plot for ' + str(n))
-    plt.plot(*zip(*plotCDF))
-    plt.scatter(*zip(*empericalCDF))
-    plt.scatter(*MADnPlot)
+    plt.title('Goodness of fit of standard normal CDF for n = ' + str(n))
+    plt.plot(*zip(*plotCDF), label='Standard Normal CDF')
+    plt.scatter(*zip(*empericalCDF), color='red', label='Emperical CDF')
+    plt.scatter(*MADnPlot, color='orange', label=r'$MAD_n$')
     # plt.axhline(np.mean(ycord), color='black')
-    plt.ylabel('mn')
-    plt.xlabel('n')
+    plt.ylabel(r'$M_n(x)$')
+    plt.xlabel(r'$n$')
+    plt.legend()
     plt.show()
 
 # Print out all results
