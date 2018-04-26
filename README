@@ -2,3 +2,4 @@ Dont have numpy or pyplot?
 
 pip install numpy 
 python -mpip install -U matplotlib
+python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose

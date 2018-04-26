@@ -1,5 +1,6 @@
 import math
 import numpy as np
+import scipy.stats as st
 import matplotlib.pyplot as plt
 
 x = 1000
@@ -49,6 +50,7 @@ print("Sqrt of Standard Deviation: ", math.sqrt(np.std(ycord)))
 
 
 points = [0, 0, 0, 0, 0, 0, 0]
+zValues = [1.4, 1, 0.5, 0, -0.5, -1, -1.4]
 
 for point in ycord:
     if(point <= 1.4):
@@ -69,8 +71,28 @@ for point in ycord:
 for i in range(0, len(points)):
     points[i] = points[i] / 880  # getting probability
 
-for point in points:
-    print("The probability of 1.4, ... is: " + str(point))
+for i in range(0, len(points)):
+    print("The probability of " + str(zValues[i]) + " is: " + str(points[i]))
+
+madnValues = []
+cdfValue = [0.9192, 0.8413, 0.6915, 0.5, 0.3085, 0.1587, 0.0808]
+for i in range(0, len(points)):
+    madnValues.append(np.abs(points[i] - cdfValue[i]))
+
+print("The max value for MADn = " + str(np.amax(madnValues)))
+
+# Calculate the z score for -2.5 to 2.5
+z = []
+cdf = []
+start = -2.5
+while start <= 2.5:
+    cdf.append(st.norm.cdf(start))
+    z.append(start)
+    start += 0.01
+
+# for i in range(0, len(z)):
+#     print("The z score for " + str(z[i]) + " is " + str(cdf[i]))
+
 
 plt.title('Monte-Carlo Simulation')
 plt.scatter(*zip(*results))
